@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation"
+            app:startDestination="@id/welcomeFragment">
+
+    <fragment android:id="@+id/welcomeFragment" android:name="boris.com.appbemyspace.launch.welcome.WelcomeFragment"
+              android:label="fragment_welcome" tools:layout="@layout/fragment_welcome">
+        <action android:id="@+id/action_welcomeFragment_to_loginFragment" app:destination="@id/loginFragment"/>
+        <action android:id="@+id/action_welcomeFragment_to_createAccountFragment"
+                app:destination="@id/createAccountFragment"/>
+        <action android:id="@+id/action_welcomeFragment_to_listSpacesFragment"
+                app:destination="@id/listSpacesFragment"/>
+        <action android:id="@+id/action_welcomeFragment_to_userProfileFragment"
+                app:destination="@+id/userProfileFragment"/>
+    </fragment>
+    <fragment android:id="@+id/loginFragment" android:name="boris.com.appbemyspace.launch.login.LoginFragment"
+              android:label="fragment_login" tools:layout="@layout/fragment_login">
+        <action android:id="@+id/action_loginFragment_to_createAccountFragment"
+                app:destination="@id/createAccountFragment"/>
+        <action android:id="@+id/action_loginFragment_to_listSpacesFragment" app:destination="@id/listSpacesFragment"/>
+    </fragment>
+    <fragment android:id="@+id/createAccountFragment"
+              android:name="boris.com.appbemyspace.launch.createAccount.CreateAccountFragment"
+              android:label="fragment_create_account" tools:layout="@layout/fragment_create_account"/>
+    <fragment android:id="@+id/listSpacesFragment"
+              android:name="boris.com.appbemyspace.main_screen.listSpaces.ListSpacesFragment"
+              android:label="fragment_list_spaces" tools:layout="@layout/fragment_list_spaces"/>
+    <fragment android:id="@+id/userProfileFragment"
+              android:name="boris.com.appbemyspace.user_profile.UserProfileFragment"
+              android:label="UserProfileFragment"
+              tools:layout="@layout/fragment_user_profil"/>
+</navigation>

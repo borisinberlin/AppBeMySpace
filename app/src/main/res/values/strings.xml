@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">AppBeMySpace</string>
+
+    <string name="login_host_number">8195</string>
+    <string name="welcome_back_to">Welcome Back To</string>
+    <string name="bemyspace">BeMySpace</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="i_want_to_create_a">I want to create a</string>
+    <string name="new_account">new account</string>
+    <string name="i_forgot_my_password">I forgot my password</string>
+    <string name="login">Login</string>
+    <string name="create_your_login_profile">Create Your Login Profile</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="create_account">Create Account</string>
+    <string name="i_want_to_login_with_my">I want to login with my</string>
+    <string name="i_already_have_an_account">I already have an account</string>
+    <string name="danceme_account">danceMe+ account</string>
+    <string name="policity_string">By signing up, I agree with BeMySpace’s Terms of Service, Payments Terms of
+        Service,Privacy Policy, Guest Refund Policy and Host Guarantee Terms.
+    </string>
+    <string name="username">Username</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

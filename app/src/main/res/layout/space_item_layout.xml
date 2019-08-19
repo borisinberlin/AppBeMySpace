@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable name="spaceInfo"
+                  type="boris.com.appbemyspace.data.model.SpaceInfo"/>
+
+        <variable name="clickListener"
+                  type="boris.com.appbemyspace.main_screen.listSpaces.adapter.SpaceInfoListener"/>
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/whiteTextColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> clickListener.onClick(spaceInfo)}">
+
+        <ImageView
+                android:layout_width="165dp"
+                android:layout_height="120dp" app:srcCompat="@color/lightBlueColor"
+                android:id="@+id/place_imageview"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setPlaceImage="@{spaceInfo}"
+                android:layout_marginTop="8dp" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"
+                android:layout_marginLeft="4dp" android:layout_marginStart="4dp"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/place_title"
+                android:gravity="left"
+                android:textColor="@color/darkWhiteTextColor"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                app:setPlaceTitle="@{spaceInfo}"
+                app:layout_constraintTop_toTopOf="@+id/place_imageview"
+                app:layout_constraintStart_toEndOf="@+id/place_imageview"
+                android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+        />
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/place_address"
+                android:gravity="left"
+                android:textColor="@color/darkWhiteTextColor"
+                android:textSize="18sp"
+                app:setPlaceAddress="@{spaceInfo}"
+                app:layout_constraintStart_toStartOf="@+id/place_title"
+                app:layout_constraintEnd_toEndOf="@+id/place_title"
+                app:layout_constraintTop_toBottomOf="@+id/place_title"
+                android:layout_marginTop="8dp" app:layout_constraintHorizontal_bias="0.0"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/price_text"
+                android:gravity="left"
+                android:textColor="@color/darkWhiteTextColor"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                app:setPlacePrice="@{spaceInfo}"
+                app:layout_constraintBottom_toBottomOf="@+id/place_imageview"
+                app:layout_constraintStart_toStartOf="@+id/place_address"
+                app:layout_constraintEnd_toEndOf="@+id/place_address"
+                app:layout_constraintHorizontal_bias="1.0" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/place_address"/>
+        <TableRow
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="@color/darkBlueColor"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp" app:layout_constraintTop_toBottomOf="@+id/place_imageview"
+                android:layout_marginTop="8dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

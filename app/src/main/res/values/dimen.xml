@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="parent_margin_value">16dp</dimen>
+    <dimen name= "item_margin_value">8dp</dimen>
+    <dimen name="item_margin_value_2">4dp</dimen>
+    <dimen name="start_top_margin_value">32dp</dimen>
+    <dimen name="left_right_margin_value">32dp</dimen>
+    <dimen name="equal_item_margin_value">0dp</dimen>
+    <dimen name="large_margin_value">64dp</dimen>
+
+    <dimen name="title_h1_textsize">40sp</dimen>
+    <dimen name="title_h2_textsize">30sp</dimen>
+    <dimen name="button_textsize">24sp</dimen>
+    <dimen name="normal_textsize">18sp</dimen>
+
+    <dimen name="button_height">30dp</dimen>
+    <dimen name="button_width">180dp</dimen>
+</resources>
