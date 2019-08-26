@@ -6,4 +6,6 @@ interface AppReferencesHelper {
     fun getCurrentUserToken():String?
     fun saveUserName(userName: String)
     fun getUsername():String?
+    fun saveUserState(state: Boolean)
+    fun getUserState(): Boolean
 }

@@ -2,13 +2,11 @@ package boris.com.appbemyspace.main_screen.listSpaces.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import boris.com.appbemyspace.data.model.SpaceInfo
 import boris.com.appbemyspace.databinding.SpaceItemLayoutBinding
-import java.io.FileNotFoundException
 
 class ListSpaceAdapter (val clikListener : SpaceInfoListener ): ListAdapter<SpaceInfo, ListSpaceAdapter.SpaceViewHolder>(
     ListSpacesDiffCallBack()

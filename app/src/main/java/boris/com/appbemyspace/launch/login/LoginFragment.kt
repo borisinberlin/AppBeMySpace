@@ -2,21 +2,19 @@ package boris.com.appbemyspace.launch.login
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
-
 import boris.com.appbemyspace.R
 import boris.com.appbemyspace.data.model.currentUser
 import boris.com.appbemyspace.data.prefs.AppReferencesHelper
 import boris.com.appbemyspace.data.prefs.AppReferencesHelperImpl
 import boris.com.appbemyspace.databinding.FragmentLoginBinding
-
 
 
 class LoginFragment : Fragment() {

@@ -1,7 +1,10 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar"></style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/darkBlueColor</item>
+
+    </style>
 
     <style name="white_bold_text_style" parent="android:Widget.TextView">
         <item name="android:textStyle">bold</item>

@@ -11,8 +11,6 @@
                 app:destination="@id/createAccountFragment"/>
         <action android:id="@+id/action_welcomeFragment_to_listSpacesFragment"
                 app:destination="@id/listSpacesFragment"/>
-        <action android:id="@+id/action_welcomeFragment_to_userProfileFragment"
-                app:destination="@+id/userProfileFragment"/>
     </fragment>
     <fragment android:id="@+id/loginFragment" android:name="boris.com.appbemyspace.launch.login.LoginFragment"
               android:label="fragment_login" tools:layout="@layout/fragment_login">
@@ -29,5 +27,11 @@
     <fragment android:id="@+id/userProfileFragment"
               android:name="boris.com.appbemyspace.user_profile.UserProfileFragment"
               android:label="UserProfileFragment"
-              tools:layout="@layout/fragment_user_profil"/>
+              tools:layout="@layout/fragment_guest_user_profile">
+        <action android:id="@+id/action_userProfileFragment_to_upgradeUserFragment"
+                app:destination="@id/upgradeUserFragment"/>
+    </fragment>
+    <fragment android:id="@+id/upgradeUserFragment"
+              android:name="boris.com.appbemyspace.upgrade_user.UpgradeUserFragment"
+              android:label="fragment_upgrade_user" tools:layout="@layout/fragment_upgrade_user"/>
 </navigation>

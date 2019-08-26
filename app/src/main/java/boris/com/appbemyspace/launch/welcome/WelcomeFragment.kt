@@ -2,7 +2,9 @@ package boris.com.appbemyspace.launch.welcome
 
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -12,7 +14,6 @@ import boris.com.appbemyspace.R
 import boris.com.appbemyspace.data.prefs.AppReferencesHelper
 import boris.com.appbemyspace.data.prefs.AppReferencesHelperImpl
 import boris.com.appbemyspace.databinding.FragmentWelcomeBinding
-import boris.com.appbemyspace.launch.login.LoginFragmentDirections
 import boris.com.appbemyspace.launch_viewmodel.WelcomeViewModel
 
 

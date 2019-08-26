@@ -24,6 +24,11 @@ interface BeMyServiceApiService {
     fun getSpaceList(@Header("Content-Type") type:String, @Header("token") token:String,
                      @Body searchData: SearchData):Deferred<SpaceData>
 
+    @GET("/user/{username}/{host}")
+    fun upgradeUser(
+        @Header("Content-Type") type: String, @Header("token") token: String,
+        @Path("host") host: Boolean, @Path("username") username: String
+    ): Deferred<EmptyResultDataModel>
 
     object LoginApiService {
 

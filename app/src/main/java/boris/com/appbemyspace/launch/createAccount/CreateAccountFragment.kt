@@ -2,11 +2,10 @@ package boris.com.appbemyspace.launch.createAccount
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
 import boris.com.appbemyspace.R
 
 // TODO: Rename parameter arguments, choose names that match

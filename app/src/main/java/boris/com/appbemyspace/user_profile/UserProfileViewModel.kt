@@ -27,7 +27,7 @@ class UserProfileViewModel(token: String, username :String) : ViewModel() {
     private var viewModelJob  = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-   val token = token
+    val token = token
     val username = username
 
     init {
@@ -53,6 +53,14 @@ class UserProfileViewModel(token: String, username :String) : ViewModel() {
 
             }
         }
+
+
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
+
 
 }
