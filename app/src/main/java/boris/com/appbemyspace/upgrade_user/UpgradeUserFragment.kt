@@ -5,19 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.DatePicker
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import boris.com.appbemyspace.R
+import boris.com.appbemyspace.data.model.EmptyResultDataModel
 import boris.com.appbemyspace.data.prefs.AppReferencesHelper
 import boris.com.appbemyspace.data.prefs.AppReferencesHelperImpl
 import boris.com.appbemyspace.databinding.FragmentUpgradeUserBinding
-import com.google.android.gms.common.api.Status
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.net.PlacesClient
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import java.util.*
 
 
@@ -27,15 +25,7 @@ class UpgradeUserFragment : Fragment() {
     private lateinit var referencesHelper: AppReferencesHelper
     private lateinit var binding: FragmentUpgradeUserBinding
 
-
-    val placesFields = Arrays.asList(
-        Place.Field.ID,
-        Place.Field.NAME,
-        Place.Field.ADDRESS
-    )
-
-    lateinit var placesClient: PlacesClient
-
+    private lateinit var calendar: Calendar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,43 +39,62 @@ class UpgradeUserFragment : Fragment() {
             false
         )
 
-        //   viewmodel = ViewModelProviders.of(this).get(UpgradeUserViewModel::class.java)
         referencesHelper = AppReferencesHelperImpl(this.context!!)
 
+        val viewModelFactory =
+            UpgareUserViewModelFactory(referencesHelper.getCurrentUserToken()!!, referencesHelper.getUsername()!!)
+        viewmodel = ViewModelProviders.of(this, viewModelFactory).get(UpgradeUserViewModel::class.java)
 
-        initPlaces()
-        setupPlacesAutoComplete()
+        binding.upgradeViewmodel = viewmodel
+        binding.lifecycleOwner = this
+
+        onDateChangeListener()
+
+        binding.cancelBtn.setOnClickListener(
+            Navigation.createNavigateOnClickListener(R.id.action_upgradeUserFragment_to_userProfileFragment)
+        )
+
+        viewmodel.getCityCountry.observe(this, Observer {
+
+            println(it)
+        })
+        viewmodel.isUpgradeUser.observe(this, Observer<EmptyResultDataModel> { result ->
+
+            if (result.code == 200) {
+                referencesHelper.saveUserState(true)
+                Navigation.createNavigateOnClickListener(R.id.action_upgradeUserFragment_to_userProfileFragment)
+            } else {
+                println("******************   HATA  *****************")
+            }
+
+        })
+
 
         return binding.root
     }
 
 
-    private fun initPlaces() {
-        Places.initialize(context!!, getString(R.string.google_api))
-        placesClient = Places.createClient(context!!)
+    fun onDateChangeListener() {
+        calendar = Calendar.getInstance()
+        val thisYear = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        binding.datePicker.init(
+            thisYear,
+            month,
+            day,
+            DatePicker.OnDateChangedListener { view, year, monthOfYear, dayOfMonth ->
+
+                viewmodel.getBirthDate.value =
+                    year.toString() + "/" + monthOfYear.toString() + "/" + dayOfMonth.toString()
+
+            }
+        )
     }
 
-    private fun setupPlacesAutoComplete() {
 
-        val autocompleteFragment: AutocompleteSupportFragment? =
-            childFragmentManager.findFragmentById(R.id.google_autocomplete_place) as AutocompleteSupportFragment?
-        autocompleteFragment!!.setPlaceFields(placesFields)
 
-        autocompleteFragment.run {
-            setPlaceFields(placesFields)
-
-            setOnPlaceSelectedListener(object : PlaceSelectionListener {
-                override fun onPlaceSelected(place: Place) {
-                    Toast.makeText(context, place.address.toString(), Toast.LENGTH_LONG)
-                }
-
-                override fun onError(status: Status) {
-                    Toast.makeText(context, status.toString(), Toast.LENGTH_LONG)
-                }
-
-            })
-        }
-    }
 
 
 }

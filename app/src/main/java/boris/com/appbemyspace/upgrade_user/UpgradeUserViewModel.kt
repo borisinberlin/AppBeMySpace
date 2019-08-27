@@ -1,42 +1,63 @@
 package boris.com.appbemyspace.upgrade_user
 
+import androidx.databinding.Bindable
+import androidx.databinding.Observable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import boris.com.appbemyspace.data.model.Address
 import boris.com.appbemyspace.data.model.EmptyResultDataModel
+import boris.com.appbemyspace.data.model.Individual
+import boris.com.appbemyspace.data.model.UserUpgradeBody
 import boris.com.appbemyspace.data.network.BeMyServiceApiService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class UpgradeUserViewModel(token: String, username: String) : ViewModel() {
+class UpgradeUserViewModel(val token: String, val username: String) : ViewModel(), Observable {
 
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    val token = token
-    val username = username
-
     private val _isUpgradeUser = MutableLiveData<EmptyResultDataModel>()
     val isUpgradeUser: LiveData<EmptyResultDataModel> get() = _isUpgradeUser
 
 
-    fun upgradeUser(): Boolean {
-        var result = false
+    @Bindable
+    val getCityCountry = MutableLiveData<String>()
+
+    @Bindable
+    val getAddress = MutableLiveData<String>()
+
+    @Bindable
+    val getZipcode = MutableLiveData<String>()
+
+
+    val getBirthDate = MutableLiveData<String>()
+
+
+    fun upgradeApply() {
+        println("HERE")
         uiScope.launch {
-            val upgadeUser = BeMyServiceApiService.ApiService.retrofitService.upgradeUser(
-                "application/json",
-                token,
-                true,
-                username
-            )            //BeMyServiceApiService.ApiService.retrofitService.getSpaceList("application/json",token,searchData)
+
+            val address = Address(
+                getCityCountry.value!!.split(",").get(0),
+                getCityCountry.value!!.split(",").get(1),
+                getZipcode.value!!
+            )
+            val individual = Individual(address, getBirthDate.value!!)
+            val userUpgradeUserInfo = UserUpgradeBody(individual, username)
+            val upgradeUser = BeMyServiceApiService.ApiService.retrofitService.upgradeUser(
+                "application/json", token, userUpgradeUserInfo
+            )
+
             try {
 
-                _isUpgradeUser.value = upgadeUser.await()
+                _isUpgradeUser.value = upgradeUser.await()
                 println("********* " + isUpgradeUser.value!!.code)
-                result = true
+
 
             } catch (t: Throwable) {
                 //_errorMessage.value = t.message
@@ -47,9 +68,13 @@ class UpgradeUserViewModel(token: String, username: String) : ViewModel() {
             }
         }
 
-        return result
+
     }
 
+
+    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {}
+
+    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {}
 
     override fun onCleared() {
         super.onCleared()

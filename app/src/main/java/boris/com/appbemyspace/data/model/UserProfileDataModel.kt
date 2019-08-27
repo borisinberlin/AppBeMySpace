@@ -3,7 +3,7 @@ package boris.com.appbemyspace.data.model
 import com.google.gson.annotations.SerializedName
 
 
-data class UserProfil(
+data class UserUpgrade(
     @SerializedName("code") val code: Int,
     @SerializedName("message") val message: String,
     @SerializedName("numberObjects") val numberObjects: Int,
