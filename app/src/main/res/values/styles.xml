@@ -33,14 +33,24 @@
     </style>
 
     <style name="button_style" parent="android:Widget.Button">
-        <item name="android:background">@drawable/login_register_btn_design</item>
+        <item name="android:background">@drawable/light_blue_button_design</item>
         <item name="android:textSize">@dimen/title_h2_textsize</item>
         <item name="android:textColor">@color/whiteTextColor</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:paddingRight">32dp</item>
+        <item name="android:paddingLeft">32dp</item>
         <item name="android:textAllCaps">false</item>
 
     </style>
 
+    <style name="white_button_style" parent="android:Widget.Button">
+        <item name="android:background">@drawable/white_button_design</item>
+        <item name="android:textColor">@color/quantum_black_100</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingRight">32dp</item>
+        <item name="android:paddingLeft">32dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
 
 
 </resources>
