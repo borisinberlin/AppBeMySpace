@@ -5,15 +5,10 @@ import androidx.databinding.Observable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import boris.com.appbemyspace.data.model.Address
 import boris.com.appbemyspace.data.model.EmptyResultDataModel
-import boris.com.appbemyspace.data.model.Individual
-import boris.com.appbemyspace.data.model.UserUpgradeBody
-import boris.com.appbemyspace.data.network.BeMyServiceApiService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 
 class UpgradeUserViewModel(val token: String, val username: String) : ViewModel(), Observable {
 
@@ -26,9 +21,6 @@ class UpgradeUserViewModel(val token: String, val username: String) : ViewModel(
 
 
     @Bindable
-    val getCityCountry = MutableLiveData<String>()
-
-    @Bindable
     val getAddress = MutableLiveData<String>()
 
     @Bindable
@@ -39,34 +31,34 @@ class UpgradeUserViewModel(val token: String, val username: String) : ViewModel(
 
 
     fun upgradeApply() {
-        println("HERE")
-        uiScope.launch {
+        /*  println("HERE")
+          uiScope.launch {
 
-            val address = Address(
-                getCityCountry.value!!.split(",").get(0),
-                getCityCountry.value!!.split(",").get(1),
-                getZipcode.value!!
-            )
-            val individual = Individual(address, getBirthDate.value!!)
-            val userUpgradeUserInfo = UserUpgradeBody(individual, username)
-            val upgradeUser = BeMyServiceApiService.ApiService.retrofitService.upgradeUser(
-                "application/json", token, userUpgradeUserInfo
-            )
+              val address = Address(
+                  getCityCountry.value!!.split(",").get(0),
+                  getCityCountry.value!!.split(",").get(1),
+                  getZipcode.value!!
+              )
+              val individual = Individual(address, getBirthDate.value!!)
+              val userUpgradeUserInfo = UserUpgradeBody(individual, username)
+              val upgradeUser = BeMyServiceApiService.ApiService.retrofitService.upgradeUser(
+                  "application/json", token, userUpgradeUserInfo
+              )
 
-            try {
+              try {
 
-                _isUpgradeUser.value = upgradeUser.await()
-                println("********* " + isUpgradeUser.value!!.code)
-
-
-            } catch (t: Throwable) {
-                //_errorMessage.value = t.message
-                println("***************** " + t.localizedMessage)
-                println("***************** " + t.message)
+                  _isUpgradeUser.value = upgradeUser.await()
+                  println("********* " + isUpgradeUser.value!!.code)
 
 
-            }
-        }
+              } catch (t: Throwable) {
+                  //_errorMessage.value = t.message
+                  println("***************** " + t.localizedMessage)
+                  println("***************** " + t.message)
+
+
+              }
+          }*/
 
 
     }

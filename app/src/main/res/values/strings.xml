@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">AppBeMySpace</string>
-    <string name="google_api">AIzaSyB51lzSn0FoNOiqFMfjjg7QvB9uOtHlgIg</string>
+    <string name="google_api_key">AIzaSyClcHw1vILoFAGa6v4gEEsrgIbCSD4ar8s</string>
 
     <string name="login_host_number">8195</string>
     <string name="welcome_back_to">Welcome Back To</string>

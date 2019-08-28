@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AutoCompleteTextView
 import android.widget.DatePicker
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -16,6 +17,8 @@ import boris.com.appbemyspace.data.model.EmptyResultDataModel
 import boris.com.appbemyspace.data.prefs.AppReferencesHelper
 import boris.com.appbemyspace.data.prefs.AppReferencesHelperImpl
 import boris.com.appbemyspace.databinding.FragmentUpgradeUserBinding
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.net.PlacesClient
 import java.util.*
 
 
@@ -26,6 +29,11 @@ class UpgradeUserFragment : Fragment() {
     private lateinit var binding: FragmentUpgradeUserBinding
 
     private lateinit var calendar: Calendar
+
+    internal lateinit var adapter: AutoCompleteAdapter
+
+    internal lateinit var placesClient: PlacesClient
+    internal lateinit var autoCompleteTextView: AutoCompleteTextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,10 +62,20 @@ class UpgradeUserFragment : Fragment() {
             Navigation.createNavigateOnClickListener(R.id.action_upgradeUserFragment_to_userProfileFragment)
         )
 
-        viewmodel.getCityCountry.observe(this, Observer {
 
-            println(it)
-        })
+        if (!Places.isInitialized()) {
+            Places.initialize(this.context!!.applicationContext, getString(R.string.google_api_key))
+        }
+
+        // autoCompleteTextView= binding.findViewById(R.id.city_country_inputtext)
+        placesClient = Places.createClient(this.requireContext())
+        binding.cityCountryInputtext.threshold = 1
+        // autoCompleteTextView.onItemClickListener = autocompleteClickListener
+        adapter = AutoCompleteAdapter(this.requireContext(), placesClient)
+        binding.cityCountryInputtext.setAdapter(adapter)
+
+
+
         viewmodel.isUpgradeUser.observe(this, Observer<EmptyResultDataModel> { result ->
 
             if (result.code == 200) {
@@ -87,8 +105,7 @@ class UpgradeUserFragment : Fragment() {
             DatePicker.OnDateChangedListener { view, year, monthOfYear, dayOfMonth ->
 
                 viewmodel.getBirthDate.value =
-                    year.toString() + "/" + monthOfYear.toString() + "/" + dayOfMonth.toString()
-
+                    dayOfMonth.toString() + "/" + monthOfYear.toString() + "/" + year.toString()
             }
         )
     }
